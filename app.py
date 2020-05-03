@@ -11,7 +11,8 @@ from resources.store import Store, StoreList
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = 'jose'
+app.config['PROPAGATE_EXCEPTIONS'] = True  # So flask will see flask_jwt errors
+app.secret_key = 'ariel'
 api = Api(app)
 
 
