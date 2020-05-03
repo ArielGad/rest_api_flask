@@ -1,1 +1,6 @@
-# Flask Rest API using Flask-RESTful & Flask-SQLAlchemy
+## Flask Rest API 
+
+Using: 
+ - Flask-RESTful
+ - Flask-SQLAlchemy
+ - JWT
