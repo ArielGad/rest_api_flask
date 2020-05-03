@@ -1,1 +1,1 @@
-# rest_api_flask
+# Flask Rest API using Flask-RESTful & Flask-SQLAlchemy
