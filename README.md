@@ -2,6 +2,6 @@
 
 Using: 
  - Flask-RESTful
- - Flask-SQLAlchemy
+ - Flask-SQLAlchemy (sqlite)
  - JWT
  - FLASK_JWT_EXTENDED
