@@ -6,6 +6,6 @@ Using:
  - JWT
  - FLASK_JWT_EXTENDED
    - Blacklist
-   - Revoked toekn
+   - Revoked token
    - Expired token
    - Invalid token
