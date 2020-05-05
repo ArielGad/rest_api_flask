@@ -4,6 +4,7 @@ from flask_restful import Api
 from flask_jwt_extended import JWTManager
 
 # from security import authenticate, identity
+from blacklist import BLACKLIST
 from resources.user import UserRegister, User, UserLogin, TokenRefresh
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
@@ -14,6 +15,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True  # So flask will see flask_jwt errors
 app.secret_key = 'ariel'  # NOTE if I want to keep separate keys -> app.config['JWT_SECRET_KEY]
+
+app.config['JWT_BLACKLIST_ENABLED'] = True
+app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']  # enable the blacklist for both tokens
+
+
 api = Api(app)
 
 
@@ -34,6 +40,11 @@ def add_claims_to_jwt(identity):
     if identity == 1:  # Instead of hard-coding, need to read from config file or database
         return {'is_admin': 1}
     return {'is_admin': 0}
+
+
+@jwt.token_in_blacklist_loader
+def check_if_token_in_blacklist(decrypted_token):
+    return decrypted_token.get('identity') in BLACKLIST  # identity defined in JWT
 
 
 @jwt.expired_token_loader
